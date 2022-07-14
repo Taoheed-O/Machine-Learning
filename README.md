@@ -1,1 +1,1 @@
-Predicting House Prices in Bangalore
+Machine Learning Projects
