@@ -6,7 +6,7 @@ import streamlit as st
 
 vectorizer_in = open('vectorizer.pkl', 'rb')
 vectorizer = pickle.load(vectorizer_in)
-pickle_in = open("spam.pkl", "rb")
+pickle_in = open("model_log.pkl", "rb")
 classifier = pickle.load(pickle_in)
 
 # Image
