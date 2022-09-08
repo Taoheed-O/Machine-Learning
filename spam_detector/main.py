@@ -6,7 +6,7 @@ from PIL import Image
 
 
 # loading in the model to predict on the data
-pickle_in = open('model_lr.pkl', 'rb')
+pickle_in = open('model_log.pkl', 'rb')
 classifier = pickle.load(pickle_in)
 vectorizer_in = open('vectorizer.pkl', 'rb')
 vectorizer = pickle.load(vectorizer_in)
