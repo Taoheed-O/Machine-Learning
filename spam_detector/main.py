@@ -1,12 +1,9 @@
-import pandas as pd
-import numpy as np
 import pickle
 import streamlit as st
-from PIL import Image
 
 
 # loading in the model to predict on the data
-pickle_in = open('model_log.pkl', 'rb')
+pickle_in = open('spam.pkl', 'rb')
 classifier = pickle.load(pickle_in)
 vectorizer_in = open('vectorizer.pkl', 'rb')
 vectorizer = pickle.load(vectorizer_in)
