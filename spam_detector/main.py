@@ -3,11 +3,13 @@ import streamlit as st
 
 
 # loading in the model to predict on the data
-pickle_in = open('spam.pkl', 'rb')
-classifier = pickle.load(pickle_in)
+
 vectorizer_in = open('vectorizer.pkl', 'rb')
 vectorizer = pickle.load(vectorizer_in)
+pickle_in = open("spam.pkl", "rb")
+classifier = pickle.load(pickle_in)
 
+# Image
 st.image("https://media.istockphoto.com/photos/phishing-scam-email-identity-alert-3d-rendering-picture-id1046171248")
 def welcome():
 	return 'welcome all'
