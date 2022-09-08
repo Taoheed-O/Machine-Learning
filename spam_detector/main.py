@@ -40,7 +40,7 @@ def main():
 	st.markdown(html_temp, unsafe_allow_html = True)
 	
 	#List of available models 
-	options = st.radio("Available Models:", ["Logistic Regression", "Multinomial Naive Bayes"])
+	options = st.radio("Available Models:", ["Logistic Regression", "Multinomial Naive Bayes","Decision Tree"])
 	result =""
 
 	# the below line ensures that when the button called 'Predict' is clicked,
