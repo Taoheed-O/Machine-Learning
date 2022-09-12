@@ -127,7 +127,7 @@ def main():
 			else:
 				st.success('A Survivor')
 	else:
-		st.success("You picked {}".format(options))
+		st.warning("You picked {}[Less accurate]".format(options))
 
 		if st.button('Predict'):
 			result = predict_dt(sex, age, n_siblings_spouses, parch, fare, Class, alone)
