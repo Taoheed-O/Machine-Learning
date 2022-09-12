@@ -1,23 +1,34 @@
-import pickle
-import numpy as np
+import joblib
 import pandas as pd
 import streamlit as st
 
 
 # loading in the model to predict on the data
-scaler_in = open('scaler.pickle', 'rb')
-scaler = pickle.load(scaler_in)
+scaler = joblib.load(r'scaler.pickle')
 
 # loading Logistic Regression model
-pickle_lr = open("model_lr.pickle", "rb")
-classifier_lr = pickle.load(pickle_lr)
+classifier_lr = joblib.load(r'model_lr.pickle')
 
 # Loading Decision Tree model
-pickle_dt = open("model_dt.pickle", "rb")
-classifier_dt = pickle.load(pickle_dt)
+classifier_dt = joblib.load(r'model_dt.pickle')
 
+
+# the font and background color, the padding and the text to be displayed
+html_temp = """
+	<div style ="background-color:black;padding:13px">
+	<h1 style ="color:white;text-align:center;">Titanic Survivors Prediction App</h1>
+	</div>
+	"""
+# this line allows us to display the front end aspects we have
+# defined in the above code
+st.markdown(html_temp, unsafe_allow_html = True)
 # Image
 st.image("https://pngimg.com/uploads/titanic/titanic_PNG36.png")
+
+# giving the webpage a title
+st.title("Machine Learning [ Classification ]")
+
+# WElcome Function
 def welcome():
 	return 'welcome all'
 
@@ -67,67 +78,42 @@ def predict_dt(sex, age, n_siblings_spouses, parch, fare, Class, alone):
 
 
 #The parameters and their input formats.
+
 # Gender
 st.text("Male / Female")
-status = st.radio("Select gender", ('male', 'female'))
-
-#conditionals for status
-if status == 'male':
-	sex = 'male'
-else:
-	sex = 'female'
+sex = st.radio("Select gender", ('male', 'female'))
 
 # Age
-try:
-	age = st.number_input("What is the age ?")
-except:
-	st.text("Enter the age of the passenger.")
+age = st.number_input("What is the age ?")
 
 # Spouses and siblings
-st.text("Number of spouses & siblings. Max: 10")
-n_siblings_spouses = st.slider("Select the number of siblings or spouses", 1,10)
+st.text("Number of spouses & siblings.")
+n_siblings_spouses = st.slider("Select the number of siblings or spouses", 0,5)
 
 # Parch
-st.text("Parch number [1 - 6] ")
-parch = st.slider("Select parch number", 1, 6)
+st.text("Parch number ")
+parch = st.slider("Select parch number", 0, 6)
 
 # Fare
 st.text("Fare")
-try:
-	fare = st.number_input("Thousand Dollars($)")
-except:
-	st.text("Enter a value for the fare")
+fare = st.number_input("Thousand Dollars($)")
 
 # Class 
 st.text("First/Second/Third class")
 Class = st.radio("Select Class", ('First', 'Second', ' Third')) 
 
 # Alone
-alone = st.radio("Is the passenger alone ?", ('yes', 'no'))
+passenger_status = st.radio("Is the passenger alone ?", ('yes', 'no'))
 #conditionals for alone status
-if alone == 'male':
-	alone = 'male'
+if (passenger_status) == 'yes':
+	alone = 'y'
 else:
-	alone = 'female'
+	alone = 'n'
 
 
 
 # this is the main function in which is defined on the webpage
 def main():
-	# giving the webpage a title
-	st.title("Machine Learning [ Classification ]")
-	
-	# the font and background color, the padding and the text to be displayed
-	html_temp = """
-	<div style ="background-color:black;padding:13px">
-	<h1 style ="color:white;text-align:center;">Titanic Survivors Prediction App</h1>
-	</div>
-	"""
-	
-	# this line allows us to display the front end aspects we have
-	# defined in the above code
-	st.markdown(html_temp, unsafe_allow_html = True)
-	
 	#List of available models 
 	options = st.radio("Available Models:", ["Logistic Regression", "Decision Tree"])
 	result =""
@@ -141,18 +127,18 @@ def main():
 		if st.button('Predict'):
 			result = predict_lr(sex, age, n_siblings_spouses, parch, fare, Class, alone)
 			if result[0] == 0:
-				st.success('Not a Survivor')
+				st.error('Not a Survivor')
 			else:
-				st.error('A Survivor')
+				st.success('A Survivor')
 	else:
 		st.success("You picked {}".format(options))
 
 		if st.button('Predict'):
 			result = predict_dt(sex, age, n_siblings_spouses, parch, fare, Class, alone)
 			if result[0] == 0:
-				st.success('Not a Survivor')
+				st.error('Not a Survivor')
 			else:
-				st.error('A Survivor')
+				st.success('A Survivor')
 	
 # Links and Final Touches
 	html_git = """
