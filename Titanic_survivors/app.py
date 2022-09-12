@@ -32,13 +32,15 @@ st.title("Machine Learning [ Classification ]")
 def welcome():
 	return 'welcome all'
 
-# defining the function which will make the prediction{Logistic regression}using the user inputs
-def predict_lr(sex, age, n_siblings_spouses, parch, fare, Class, alone):
-    features = ['sex_female', 'n_siblings_spouses_8', 'n_siblings_spouses_1',
+# Features and labels
+features = ['sex_female', 'n_siblings_spouses_8', 'n_siblings_spouses_1',
     'parch_6', 'n_siblings_spouses_4', 'parch_0', 'parch_5', 'n_siblings_spouses_0', 'parch_3',
     'sex_male', 'Class_First', 'parch_2', 'alone_y', 'n_siblings_spouses_5', 'n_siblings_spouses_2',
     'n_siblings_spouses_3', 'Class_Second', 'parch_1', 'alone_n', 'Class_Third', 'parch_4']
-    labels = ['sex', 'age', 'n_siblings_spouses', 'parch', 'fare', 'Class', 'alone']
+labels = ['sex', 'age', 'n_siblings_spouses', 'parch', 'fare', 'Class', 'alone']
+
+# defining the function which will make the prediction{Logistic regression}using the user inputs
+def predict_lr(sex, age, n_siblings_spouses, parch, fare, Class, alone):
     feature_names = [sex, age, n_siblings_spouses, parch, fare, Class, alone]
     features_df = pd.DataFrame([feature_names], columns=labels)
     categorical_features = ['sex', 'n_siblings_spouses', 'parch', 'Class', 'alone']
@@ -55,12 +57,7 @@ def predict_lr(sex, age, n_siblings_spouses, parch, fare, Class, alone):
     return result
 
 # defining the function which will make the prediction{Decision Tree}using the user inputs
-def predict_dt(sex, age, n_siblings_spouses, parch, fare, Class, alone):
-    features = ['sex_female', 'n_siblings_spouses_8', 'n_siblings_spouses_1',
-    'parch_6', 'n_siblings_spouses_4', 'parch_0', 'parch_5', 'n_siblings_spouses_0', 'parch_3',
-    'sex_male', 'Class_First', 'parch_2', 'alone_y', 'n_siblings_spouses_5', 'n_siblings_spouses_2',
-    'n_siblings_spouses_3', 'Class_Second', 'parch_1', 'alone_n', 'Class_Third', 'parch_4']
-    labels = ['sex', 'age', 'n_siblings_spouses', 'parch', 'fare', 'Class', 'alone']
+def predict_dt(sex, age, n_siblings_spouses, parch, fare, Class, alone):  
     feature_names = [sex, age, n_siblings_spouses, parch, fare, Class, alone]
     features_df = pd.DataFrame([feature_names], columns=labels)
     categorical_features = ['sex', 'n_siblings_spouses', 'parch', 'Class', 'alone']
@@ -76,31 +73,30 @@ def predict_dt(sex, age, n_siblings_spouses, parch, fare, Class, alone):
     result = classifier_dt.predict(features_df)
     return result
 
-
 #The parameters and their input formats.
 
 # Gender
-st.text("Male / Female")
+st.write("Male / Female")
 sex = st.radio("Select gender", ('male', 'female'))
 
 # Age
 age = st.number_input("What is the age ?")
 
 # Spouses and siblings
-st.text("Number of spouses & siblings.")
+st.write("Number of spouses & siblings.")
 n_siblings_spouses = st.slider("Select the number of siblings or spouses", 0,5)
 
 # Parch
-st.text("Parch number ")
+st.write("Parch number ")
 parch = st.slider("Select parch number", 0, 6)
 
 # Fare
-st.text("Fare")
+st.write("Fare")
 fare = st.number_input("Thousand Dollars($)")
 
 # Class 
-st.text("First/Second/Third class")
-Class = st.radio("Select Class", ('First', 'Second', ' Third')) 
+st.write("First/Second/Third")
+Class = st.radio("Select Class", ('First', 'Second', 'Third')) 
 
 # Alone
 passenger_status = st.radio("Is the passenger alone ?", ('yes', 'no'))
