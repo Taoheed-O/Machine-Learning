@@ -80,7 +80,7 @@ st.write("Male / Female")
 sex = st.radio("Select gender", ('male', 'female'))
 
 # Age
-age = st.number_input("What is the age ?")
+age = st.number_input("What is the age ?",0, 200)
 
 # Spouses and siblings
 st.write("Number of spouses & siblings.")
