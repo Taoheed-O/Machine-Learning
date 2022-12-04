@@ -1,4 +1,4 @@
-# __**MACHINE LEARNING Projects**__
+# **MACHINE LEARNING Projects**
 
 ## CLASSIFICATION
        - Titanic survivors
